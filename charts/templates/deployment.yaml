@@ -19,6 +19,7 @@ spec:
         dapr.io/app-id: server
         dapr.io/app-port: "50051"
         dapr.io/app-protocol: "grpc"
+        dapr.io/log-level: "debug"
         # enable gRPC proxy
         dapr.io/config: "featureconfig"
     spec:
@@ -49,6 +50,7 @@ spec:
         dapr.io/app-id: client
         dapr.io/app-port: "80"
         dapr.io/app-protocol: "http"
+        dapr.io/log-level: "debug"
         # enable gRPC proxy
         dapr.io/config: "featureconfig"
     spec:

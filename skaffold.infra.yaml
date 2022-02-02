@@ -6,3 +6,10 @@ deploy:
       - name: dapr
         repo: https://dapr.github.io/helm-charts/
         remoteChart: dapr
+        overrides:
+          global:
+            mtls:
+              workloadCertTTL: 30s
+              allowedClockSkew: 1s
+          dapr_sentry:
+            logLevel: debug
