@@ -1,0 +1,60 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+  labels:
+    app: server
+spec:
+  selector:
+    matchLabels:
+      app: server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: server
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: server
+        dapr.io/app-port: "50051"
+        dapr.io/app-protocol: "grpc"
+        # enable gRPC proxy
+        dapr.io/config: "featureconfig"
+    spec:
+      containers:
+        - name: server
+          # set tag automatically by skaffold
+          image: "server:{{$.Values.serverimage.tag}}"
+          # NOTE: `always` fails if cluster is in local (without pushing to container registry)
+          imagePullPolicy: IfNotPresent
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client
+  labels:
+    app: client
+spec:
+  selector:
+    matchLabels:
+      app: client
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: client
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: client
+        dapr.io/app-port: "80"
+        dapr.io/app-protocol: "http"
+        # enable gRPC proxy
+        dapr.io/config: "featureconfig"
+    spec:
+      containers:
+        - name: client
+          # set tag automatically by skaffold
+          image: "client:{{$.Values.clientimage.tag}}"
+          # NOTE: `always` fails if cluster is in local (without pushing to container registry)
+          imagePullPolicy: IfNotPresent

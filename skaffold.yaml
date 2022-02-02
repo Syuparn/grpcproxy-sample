@@ -1,0 +1,23 @@
+apiVersion: skaffold/v2beta23
+kind: Config
+build:
+  artifacts:
+  - image: client
+    docker:
+      dockerfile: Dockerfile.client
+  - image: server
+    docker:
+      dockerfile: Dockerfile.server
+  local:
+    # local deploy does not need image pushing
+    push: false
+deploy:
+  helm:
+    releases:
+    - name: hello
+      chartPath: charts
+      artifactOverrides:
+        clientimage: client # no tag
+        serverimage: server # no tag
+      imageStrategy:
+        helm: {}

@@ -1,0 +1,9 @@
+FROM golang:1.17
+
+WORKDIR /work
+
+COPY ./server .
+
+RUN go build
+
+ENTRYPOINT [ "./server" ]

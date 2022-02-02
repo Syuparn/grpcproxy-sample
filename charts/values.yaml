@@ -1,0 +1,10 @@
+# default settings
+replicaCount: 1
+
+# overridden by skaffold
+clientimage:
+  repository: dummy
+  tag: latest
+serverimage:
+  repository: dummy
+  tag: latest
