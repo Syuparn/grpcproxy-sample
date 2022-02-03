@@ -15,16 +15,16 @@ import (
 var addr = "localhost:50001"
 
 func request() {
-	// Set up a connection to the server.
-	conn, err := grpc.Dial(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
-	if err != nil {
-		log.Fatalf("did not connect: %v", err)
-	}
-	defer conn.Close()
-	c := pb.NewGreeterClient(conn)
-
 	for {
 		func() {
+			// Set up a connection to the server.
+			conn, err := grpc.Dial(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
+			if err != nil {
+				log.Fatalf("did not connect: %v", err)
+			}
+			defer conn.Close()
+			c := pb.NewGreeterClient(conn)
+
 			// Contact the server and print out its response.
 			ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 			defer cancel()
