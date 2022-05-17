@@ -26,7 +26,7 @@ func request() {
 	for {
 		func() {
 			// Contact the server and print out its response.
-			ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+			ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 			defer cancel()
 
 			ctx = metadata.AppendToOutgoingContext(ctx, "dapr-app-id", "server")
@@ -38,7 +38,7 @@ func request() {
 				log.Printf("Greeting: %s", r.GetMessage())
 			}
 
-			time.Sleep(5 * time.Second)
+			time.Sleep(3 * time.Second)
 		}()
 	}
 }
