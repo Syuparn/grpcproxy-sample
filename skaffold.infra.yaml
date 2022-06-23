@@ -6,3 +6,4 @@ deploy:
       - name: dapr
         repo: https://dapr.github.io/helm-charts/
         remoteChart: dapr
+        version: "1.8.0-rc.2"

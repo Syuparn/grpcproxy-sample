@@ -13,9 +13,9 @@ func dummyHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	// request to hello server
-	go request()
-	time.Sleep(1 * time.Second)
-	go request()
+	go request("request 1")
+	time.Sleep(1500 * time.Millisecond)
+	go request("request 2")
 
 	http.HandleFunc("/", dummyHandler)
 	if err := http.ListenAndServe(":80", nil); err != nil {

@@ -14,7 +14,7 @@ import (
 // request to hello server
 var addr = "localhost:50001"
 
-func request() {
+func request(msg string) {
 	// Set up a connection to the server.
 	conn, err := grpc.Dial(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
@@ -31,7 +31,7 @@ func request() {
 
 			ctx = metadata.AppendToOutgoingContext(ctx, "dapr-app-id", "server")
 
-			r, err := c.SayHello(ctx, &pb.HelloRequest{Name: "world"})
+			r, err := c.SayHello(ctx, &pb.HelloRequest{Name: msg})
 			if err != nil {
 				log.Printf("could not greet: %+v", err)
 			} else {
